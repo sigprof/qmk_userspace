@@ -261,7 +261,8 @@ void test_slow_update(bool invert) {
         swap_hsv(&bg, &fg);
     }
 
-    static uint8_t  phase, x, y, char_index, first_char;
+    static uint8_t  phase, char_index, first_char;
+    static uint16_t x, y;
     static uint16_t timer;
     static uint16_t delay = 500;
 
