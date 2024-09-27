@@ -228,6 +228,12 @@ static painter_device_t make_screen(void) {
     return qp_ili9341_make_spi_device(240, 320, DISPLAY_CS_PIN, DISPLAY_DC_PIN, DISPLAY_RST_PIN, 4, 0);
 }
 
+#elif defined(QUANTUM_PAINTER_ST7567S_I2C_ENABLE)
+
+static painter_device_t make_screen(void) {
+    return qp_st7567s_make_i2c_device(128, 64, 0x3F);
+}
+
 #else
 #    error "Display driver type not defined or unknown"
 #endif
