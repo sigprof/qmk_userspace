@@ -32,8 +32,9 @@ enum tap_dance_ids {
     TD_RSFT,
 };
 
-#define U_FESC  LT(_FN, KC_ESC)
+#define U_CESC  MT(MOD_LCTL, KC_ESC)
 #define U_FAPP  LT(_FN, KC_APP)
+#define U_FN    MO(_FN)
 #define U_TRALT TD(TD_RALT)
 #define U_TRCTL TD(TD_RCTL)
 #define U_TLSFT TD(TD_LSFT)
@@ -62,10 +63,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * labeled as “TRAlt” and “TRCtl”, but the primary function of the “TRCtl”
      * key is switching to the Fn layer.
      *
-     * On the left side the Caps Lock key is also overloaded to work as Fn on
-     * hold and Esc on tap (the replacement with Esc is done for compatibility
+     * On the left side the Caps Lock key is also overloaded to work as Ctrl on
+     * hold and Esc on tap (the Ctrl modifier location is similar to HHKB, and
+     * the replacement of the tap action with Esc is done for compatibility
      * with my custom layouts for some smaller keyboards which also have the
-     * Esc key in that location).
+     * Esc key in that location).  The bottom left key (originally Ctrl) is
+     * repurposed as the Fn layer switch key.
      *
      * ┌───┐┌───┬───┬───┬───┐┌───┬───┬───┬───┐┌───┬───┬───┬───┐┌───┐┌───┐
      * │Esc││F1 │F2 │F3 │F4 ││F5 │F6 │F7 │F8 ││F9 │F10│F11│F12││Ins││Del│
@@ -75,11 +78,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤├───┤
      * │ Tab │ Q │ W │ E │ R │ T │ Y │ U │ I │ O │ P │ [ │ ] │BkSp ││PgD│
      * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴─────┤└───┘
-     * │ EscFn│ A │ S │ D │ F │ G │ H │ J │ K │ L │ ; │ ' │  Enter │
+     * │EscCtl│ A │ S │ D │ F │ G │ H │ J │ K │ L │ ; │ ' │  Enter │
      * ├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────┬───┘
      * │ ShiftL │ Z │ X │ C │ V │ B │ N │ M │ , │ . │ / │ShiftL│┌───┐
      * ├────┬───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴───┴┬──┴──┬───┘│ ↑ │
-     * │Ctrl│GUI │Alt │                        │TRAlt│TRCtl│┌───┼───┼───┐
+     * │ Fn │GUI │Alt │                        │TRAlt│TRCtl│┌───┼───┼───┐
      * └────┴────┴────┴────────────────────────┴─────┴─────┘│ ← │ ↓ │ → │
      *                                                      └───┴───┴───┘
      */
@@ -88,9 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,    KC_F1,   KC_F2,   KC_F3,   KC_F4,     KC_F5,   KC_F6,   KC_F7,   KC_F8,     KC_F9,   KC_F10,  KC_F11,  KC_F12,     KC_INS,    KC_DEL,
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  U_NBSLS,            KC_PGUP,
         KC_TAB,      KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSPC,        KC_PGDN,
-        U_FESC,        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
+        U_CESC,        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
         U_TLSFT,            KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, U_TRSFT,          KC_UP,
-        KC_LCTL,   KC_LGUI,   KC_LALT,                       KC_SPC,                              U_TRALT,     U_TRCTL,        KC_LEFT, KC_DOWN, KC_RGHT
+        U_FN,      KC_LGUI,   KC_LALT,                       KC_SPC,                              U_TRALT,     U_TRCTL,        KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
     /*
@@ -122,9 +125,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         U_BTN1R,   KC_F13,  KC_F14,  KC_F15,  KC_F16,    KC_F17,  KC_F18,  KC_F19,  KC_F20,    KC_F21,  KC_F22,  KC_F23,  KC_F24,     KC_HOME,   KC_END,
         KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,             U_CPGUP,
         KC_CAPS,     MS_BTN1, MS_UP,   MS_BTN2, MS_WHLU, DM_PLY1, KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_VOLU, KC_MUTE, U_TGNUM,        U_CPGDN,
-        _______,       MS_LEFT, MS_DOWN, MS_RGHT, MS_WHLD, DM_PLY2, KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_VOLD, KC_PENT,
+        U_FNCTL,       MS_LEFT, MS_DOWN, MS_RGHT, MS_WHLD, DM_PLY2, KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_VOLD, KC_PENT,
         _______,            MS_BTN3, MS_BTN4, MS_BTN5, MS_WHLL, MS_WHLR, KC_PSCR, KC_SCRL, KC_PAUS, U_OSRGU, U_OSRCT, _______,          KC_PGUP,
-        U_FNCTL,   _______,   _______,                      U_MOADJ,                              _______,     _______,        KC_HOME, KC_PGDN, KC_END
+        _______,   _______,   _______,                      U_MOADJ,                              _______,     _______,        KC_HOME, KC_PGDN, KC_END
     ),
 
     /*
@@ -211,7 +214,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case U_FESC:
+        case U_CESC:
         case U_FAPP:
             return true;
 
