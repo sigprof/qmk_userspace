@@ -1,6 +1,7 @@
 {
-    "userspace_version": "1.0",
+    "userspace_version": "1.1",
     "build_targets": [
-        ["winry/winry315", "sigprof"]
+        ["winry/winry315", "sigprof"],
+        ["idobao/id80/v2/ansi", "sigprof"]
     ]
 }
