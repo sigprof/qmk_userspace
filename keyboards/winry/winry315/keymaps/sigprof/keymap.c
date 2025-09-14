@@ -75,8 +75,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // Configuration
     [_ADJ] = LAYOUT_top(
-            RGB_M_P,      RGB_M_B,     QK_BOOT,
-        _______, RGB_TOG, KC_PSLS, KC_PAST, KC_PMNS,
+            _______,      _______,     QK_BOOT,
+        _______, RM_TOGG, KC_PSLS, KC_PAST, KC_PMNS,
         KC_NUM,  TO(4),   TO(5),   TO(6),   KC_PPLS,
         TO(0),   TO(1),   TO(2),   TO(3),   _______
     ),
@@ -84,9 +84,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_NUMPD] =   { ENCODER_CCW_CW(KC_WH_L, KC_WH_R), ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_WH_U, KC_WH_D) },
+    [_NUMPD] =   { ENCODER_CCW_CW(MS_WHLL, MS_WHLR), ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(MS_WHLU, MS_WHLD) },
     [1 ... 6] =  { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
-    [_ADJ] =     { ENCODER_CCW_CW(RGB_HUD, RGB_HUI), ENCODER_CCW_CW(RGB_SAD, RGB_SAI), ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [_ADJ] =     { ENCODER_CCW_CW(RM_HUED, RM_HUEU), ENCODER_CCW_CW(RM_SATD, RM_SATU), ENCODER_CCW_CW(RM_VALD, RM_VALU) },
 };
 
 bool rgb_matrix_indicators_user(void) {
